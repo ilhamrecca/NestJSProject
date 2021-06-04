@@ -1,16 +1,22 @@
-import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn, Unique } from "typeorm";
+import {
+  BeforeInsert,
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  Unique,
+} from 'typeorm';
 
 @Entity()
-export class TransactionEntity{ 
-    @PrimaryGeneratedColumn()
-    id: number;
+export class TransactionEntity {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column({nullable: false})
-    product: number
+  @Column({ nullable: false })
+  product: number;
 
-    @Column()
-    amount: number
+  @Column()
+  amount: number;
 
-    @Column()
-    jenisTransaksi: string
+  @Column()
+  jenisTransaksi: string;
 }

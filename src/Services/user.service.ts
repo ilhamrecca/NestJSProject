@@ -14,19 +14,20 @@ export class UserService{
 
     async signUp(userData: CreateUserDto): Promise<Object> {
         userData.password = await this.authService.hashPassword(userData.password)
-        const newUser = this.userRepository.create(userData); 
+        const newUser = this.userRepository.create(userData);
+        await this.userRepository.save(newUser);
         delete newUser.password;
         delete newUser.email;
         const newUserData = {
             data: newUser,
             session: await this.authService.generate({ email: userData.email })
         }
-        return newUserData;
+        return newUserData
     }
 
     async findUser(email): Promise<CreateUserDto>{
         try {
-            const user = await this.userRepository.findOneOrFail({ email: email })
+            const user = await this.userRepository.findOneOrFail({email: email})
             return user
             
         } catch (err) {
